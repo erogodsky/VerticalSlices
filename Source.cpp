@@ -14,7 +14,7 @@ namespace stdfs = std::filesystem;
 int main()
 {
 	/*
-		Получение векторов проекций
+		РџРѕР»СѓС‡РµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ РїСЂРѕРµРєС†РёР№
 	*/
 	vector<cv::Mat> coronar, sagittal, axial;
 	getDICOMProjections(coronar, sagittal, axial);
@@ -31,10 +31,10 @@ int main()
 		cv::imshow("axial", dst3);
 
 		/*
-			Перемещение между срезами (русская раскладка):
-			z - назад;
-			x - вперёд;
-			Esc - выход
+			РџРµСЂРµРјРµС‰РµРЅРёРµ РјРµР¶РґСѓ СЃСЂРµР·Р°РјРё (СЂСѓСЃСЃРєР°СЏ СЂР°СЃРєР»Р°РґРєР°):
+			z - РЅР°Р·Р°Рґ;
+			x - РІРїРµСЂС‘Рґ;
+			Esc - РІС‹С…РѕРґ
 		*/
 		int k = cv::waitKey(0);
 		if (k == 255) //z
