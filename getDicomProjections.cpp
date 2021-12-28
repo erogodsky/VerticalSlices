@@ -14,7 +14,7 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 {
 	vector<string> files;
 
-	files = getFileNames("ANONIM"); //Получение вектора имён файлов
+	files = getFileNames("Sitnikov\\ANONIM_MONOCHROME2"); //Получение вектора имён файлов
 
 	axial.resize(files.size());
 	axial = prepareImages(files); //Получение вектора изображений
@@ -27,11 +27,11 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 	{
 		if (i < axial[0].rows)
 		{
-			coronar.push_back(cv::Mat::zeros(axial.size(), axial[0].cols, CV_8UC3));
+			coronar.push_back(cv::Mat::zeros(axial.size(), axial[0].cols, CV_16UC1));
 		}
 		if (i < axial[0].cols)
 		{
-			sagittal.push_back(cv::Mat::zeros(axial.size(), axial[0].rows, CV_8UC3));
+			sagittal.push_back(cv::Mat::zeros(axial.size(), axial[0].rows, CV_16UC1));
 		}
 		i++;
 	}
@@ -39,7 +39,7 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 	/*
 		Попиксельное заполнение векторов проекций
 	*/
-	cv::Vec3b activePixel;
+	unsigned short activePixel;
 	for (int i = 0; i < axial[0].rows; i++)
 	{
 		cout << i * 100. / axial[0].rows << "% \n";
@@ -48,11 +48,11 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 		{
 			for (int k = 0; k < axial[0].cols; k++)
 			{
-				activePixel = axial[j].at<cv::Vec3b>(cv::Point(axial[j].cols - k - 1, i));;
+				activePixel = axial[j].at<unsigned short>(cv::Point(axial[j].cols - k - 1, i));
 
-				coronar[i].at<cv::Vec3b>(cv::Point(k, j)) = activePixel;
+				coronar[i].at<unsigned short>(cv::Point(k, j)) = activePixel;
 
-				sagittal[axial[j].cols - k - 1].at<cv::Vec3b>(cv::Point(i, j)) = activePixel;
+				sagittal[axial[j].cols - k - 1].at<unsigned short>(cv::Point(i, j)) = activePixel;
 			}
 		}
 

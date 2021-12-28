@@ -82,10 +82,10 @@ vector<cv::Mat> prepareImages(vector<string> files)
 		{
 			if (image->getStatus() == EIS_Normal)
 			{
-				Uint8* pixelData = (Uint8*)(image->getOutputData(8));
+				Uint16* pixelData = (Uint16*)(image->getOutputData(16));
 				if (pixelData != NULL)
 				{
-					dst = cv::Mat(nHeight, nWidth, CV_8UC3, pixelData);
+					dst = cv::Mat(nHeight, nWidth, CV_16UC1, pixelData);
 				}
 			}
 			else
