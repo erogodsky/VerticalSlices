@@ -17,14 +17,14 @@
 using namespace std;
 
 /*
-	Функция создаёт упорядоченный вектор изображений
+	Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°С‘С‚ СѓРїРѕСЂСЏРґРѕС‡РµРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РёР·РѕР±СЂР°Р¶РµРЅРёР№
 */
 vector<cv::Mat> prepareImages(vector<string> files)
 {
 	DJDecoderRegistration::registerCodecs();
 
 	/*
-		Ключ сортировки – тег DCM_SliceLocation, DcmTagKey(0x0020, 0x1041)
+		РљР»СЋС‡ СЃРѕСЂС‚РёСЂРѕРІРєРё вЂ“ С‚РµРі DCM_SliceLocation, DcmTagKey(0x0020, 0x1041)
 	*/
 	auto dicomSlicesOrderSort = [](string const& f1, string const& f2) -> bool
 	{
@@ -57,10 +57,10 @@ vector<cv::Mat> prepareImages(vector<string> files)
 		return  sliceLocation1 > sliceLocation2;
 	};
 
-	sort(files.begin(), files.end(), dicomSlicesOrderSort); //Сортировка файлов по порядку срезов
+	sort(files.begin(), files.end(), dicomSlicesOrderSort); //РЎРѕСЂС‚РёСЂРѕРІРєР° С„Р°Р№Р»РѕРІ РїРѕ РїРѕСЂСЏРґРєСѓ СЃСЂРµР·РѕРІ
 
 	/*
-		Создание и заполнение вектора изображений типа cv::Mat
+		РЎРѕР·РґР°РЅРёРµ Рё Р·Р°РїРѕР»РЅРµРЅРёРµ РІРµРєС‚РѕСЂР° РёР·РѕР±СЂР°Р¶РµРЅРёР№ С‚РёРїР° cv::Mat
 	*/
 	vector<cv::Mat> DICOMs;
 	for (int i = 0; i < files.size(); i++)

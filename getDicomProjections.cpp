@@ -14,13 +14,13 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 {
 	vector<string> files;
 
-	files = getFileNames("ANONIM"); //Получение вектора имён файлов
+	files = getFileNames("ANONIM"); //РџРѕР»СѓС‡РµРЅРёРµ РІРµРєС‚РѕСЂР° РёРјС‘РЅ С„Р°Р№Р»РѕРІ
 
 	axial.resize(files.size());
-	axial = prepareImages(files); //Получение вектора изображений
+	axial = prepareImages(files); //РџРѕР»СѓС‡РµРЅРёРµ РІРµРєС‚РѕСЂР° РёР·РѕР±СЂР°Р¶РµРЅРёР№
 
 	/*
-		Подготовка векторов для храниния коронарной и сагиттальной проекций
+		РџРѕРґРіРѕС‚РѕРІРєР° РІРµРєС‚РѕСЂРѕРІ РґР»СЏ С…СЂР°РЅРёРЅРёСЏ РєРѕСЂРѕРЅР°СЂРЅРѕР№ Рё СЃР°РіРёС‚С‚Р°Р»СЊРЅРѕР№ РїСЂРѕРµРєС†РёР№
 	*/
 	int i = 0;
 	while ((i < axial[0].rows) || (i < axial[0].cols))
@@ -37,7 +37,7 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 	}
 
 	/*
-		Попиксельное заполнение векторов проекций
+		РџРѕРїРёРєСЃРµР»СЊРЅРѕРµ Р·Р°РїРѕР»РЅРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ РїСЂРѕРµРєС†РёР№
 	*/
 	cv::Vec3b activePixel;
 	for (int i = 0; i < axial[0].rows; i++)
@@ -59,8 +59,8 @@ void getDICOMProjections(vector<cv::Mat>& coronar, vector<cv::Mat>& sagittal, ve
 	}
 
 	/*
-		Растягивание изображений вдоль оси Y с 
-			коэффициентом = (толщина среза + расстояние между срезами)/толщина среза
+		Р Р°СЃС‚СЏРіРёРІР°РЅРёРµ РёР·РѕР±СЂР°Р¶РµРЅРёР№ РІРґРѕР»СЊ РѕСЃРё Y СЃ 
+			РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРј = (С‚РѕР»С‰РёРЅР° СЃСЂРµР·Р° + СЂР°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ СЃСЂРµР·Р°РјРё)/С‚РѕР»С‰РёРЅР° СЃСЂРµР·Р°
 	*/
 	float resizeCoef = getResizeCoef(files);
 	i = 0;

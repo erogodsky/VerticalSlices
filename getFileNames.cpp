@@ -5,7 +5,7 @@ using namespace std;
 namespace stdfs = std::filesystem;
 
 /*
-	Создание вектора имён файлов исследования
+	РЎРѕР·РґР°РЅРёРµ РІРµРєС‚РѕСЂР° РёРјС‘РЅ С„Р°Р№Р»РѕРІ РёСЃСЃР»РµРґРѕРІР°РЅРёСЏ
 */
 vector<string> getFileNames(stdfs::path path = "ANONIM")
 {
