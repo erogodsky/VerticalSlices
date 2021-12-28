@@ -32,13 +32,14 @@ float getResizeCoef(vector<string> files)
 		}
 		if (!fileformat1.getDataset()->findAndGetFloat64(DCM_SpacingBetweenSlices, spacingBetweenSlices).good())
 		{
-			cerr << "Error: cannot access Spacing between slices!" << endl;
+			spacingBetweenSlices = 0.6;
+			//cerr << "Error: cannot access Spacing between slices!" << endl;
 		}
 	}
 	else
 		cerr << "Error: cannot read DICOM file (" << status.text() << ")" << endl;
 
-	resizeCoef = (sliceThickness + spacingBetweenSlices)/sliceThickness;
+	resizeCoef = (sliceThickness + spacingBetweenSlices)/sliceThickness - 1./files.size();
 
 	return resizeCoef;
 }
