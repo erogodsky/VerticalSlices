@@ -1,8 +1,4 @@
-#include <iostream>
-#include <filesystem>
-
-using namespace std;
-namespace stdfs = std::filesystem;
+#include "getFileNames.h"
 
 /*
 	Создание вектора имён файлов исследования
