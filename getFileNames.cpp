@@ -1,15 +1,12 @@
-#include "getFileNames.h"
+//#include "getFileNames.h"
+#include "DICOMImage.h"
 
 /*
 	Создание вектора имён файлов исследования
 */
-vector<string> getFileNames(stdfs::path path = "ANONIM")
+void DICOMImage::getFileNames()
 {
-	vector<string> files;
-
 	const stdfs::directory_iterator end{};
-	for (stdfs::directory_iterator iter{ path }; iter != end; ++iter) 
-		files.push_back(string(iter->path().string()));
-
-	return files;
+	for (stdfs::directory_iterator iter{ path_ }; iter != end; ++iter) 
+		files_.push_back(string(iter->path().string()));
 }

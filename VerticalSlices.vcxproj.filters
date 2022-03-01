@@ -32,19 +32,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source.h">
+    <ClInclude Include="DICOMImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="getFileNames.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="getDicomProjections.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="prepareImages.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="getResizeCoef.h">
+    <ClInclude Include="Sortings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

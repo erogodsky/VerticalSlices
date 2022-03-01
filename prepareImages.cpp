@@ -1,82 +1,83 @@
-#include "prepareImages.h"
+//#include "prepareImages.h"
+#include "DICOMImage.h"
 
 /*
 	Функция создаёт упорядоченный вектор изображений
 */
-vector<cv::Mat> prepareImages(vector<string> files)
+void DICOMImage::prepareImages()
 {
 	DJDecoderRegistration::registerCodecs();
 
-	/*
-		Ключ сортировки – тег DCM_SliceLocation, DcmTagKey(0x0020, 0x1041)
-	*/
-	auto dicomSlicesOrderSort = [](string const& f1, string const& f2) -> bool
-	{
-		DcmFileFormat fileformat1;
-		Float64 sliceLocation1;
-		OFCondition status1 = fileformat1.loadFile(f1.c_str());
-		if (status1.good())
-		{
-			if (!fileformat1.getDataset()->findAndGetFloat64(DCM_SliceLocation, sliceLocation1).good())
-			{
-				cerr << "Error: cannot access Slice location!" << endl;
-			}
-		}
-		else
-			cerr << "Error: cannot read DICOM file (" << status1.text() << ")" << endl;
-
-		DcmFileFormat fileformat2;
-		Float64 sliceLocation2;
-		OFCondition status2 = fileformat2.loadFile(f2.c_str());
-		if (status2.good())
-		{
-			if (!fileformat2.getDataset()->findAndGetFloat64(DCM_SliceLocation, sliceLocation2).good())
-			{
-				cerr << "Error: cannot access Slice location!" << endl;
-			}				
-		}
-		else
-			cerr << "Error: cannot read DICOM file (" << status2.text() << ")" << endl;
-
-		return  sliceLocation1 > sliceLocation2;
-	};
-
-	sort(files.begin(), files.end(), dicomSlicesOrderSort); //Сортировка файлов по порядку срезов
+	sort(files_.begin(), files_.end(), dicomSlicesOrderSort); //Сортировка файлов по порядку срезов
 
 	/*
 		Создание и заполнение вектора изображений типа cv::Mat
 	*/
-	vector<cv::Mat> DICOMs;
-	for (int i = 0; i < files.size(); i++)
+	////////////////////////////
+	ofstream myfile;
+	myfile.open("densities_OutputData.txt");
+	////////////////////////////
+	bool topReached = false;
+	for (int i = 0; i < files_.size(); i++)
 	{
 		cv::Mat dst;
 
-		/*DcmFileFormat fileformat;
-		DJ_RPLossless params;
-		fileformat.loadFile(files[i].c_str());
-		fileformat.chooseRepresentation(EXS_LittleEndianImplicit, &params);*/
-		DicomImage* image = new DicomImage (files[i].c_str());
+		DicomImage* image = new DicomImage (files_[i].c_str());
 		
 		int nWidth = image->getWidth();
 		int nHeight = image->getHeight();
 		int depth = image->getDepth();
 
-		image->setWindow(100, 400);
+		//image->setWindow(300, 400);
 		if (image != NULL)
 		{
 			if (image->getStatus() == EIS_Normal)
 			{
-				Uint16* pixelData = (Uint16*)(image->getOutputData(16));
+				int nWidth = image->getWidth();
+				int nHeight = image->getHeight();
+
+				const DiPixel* dmp = image->getInterData();
+				void* pixelData = NULL;
+				pixelData = (void*)dmp->getData();
+
+				//Uint16* pixelData = (Uint16*)(image->getOutputData(16));
+
 				if (pixelData != NULL)
 				{
-					dst = cv::Mat(nHeight, nWidth, CV_16UC1, pixelData);
+					dst = cv::Mat(nHeight, nWidth, CV_16SC1, pixelData);
+
+					double minVal;
+					double maxVal;
+					cv::Point minLoc;
+					cv::Point maxLoc;
+					cv::minMaxLoc(dst, &minVal, &maxVal, &minLoc, &maxLoc);
+					if (topReached)
+					{
+						axial_.push_back(dst);
+					}
+					else 
+					{
+						if (maxVal > 1500)
+						{
+							topReached = true;
+						}
+					}
 				}
+				/*const DiPixel* dmp = image->getInterData();
+				void* interPixelData = NULL;
+				interPixelData = (void*)dmp->getData();
+				int nWidth = image->getWidth();
+				int nHeight = image->getHeight();
+				cv::Mat density_avg(nHeight, nWidth, CV_16SC1, interPixelData);
+				float avg_dens = cv::mean(density_avg).val[0];
+				myfile << i + 1 << "    " << avg_dens << endl;*/
+
+
 			}
 			else
 				cerr << "Error: cannot load DICOM image (" << DicomImage::getString(image->getStatus()) << ")" << endl;
 		}
-		DICOMs.push_back(dst);
 	}
 
-	return DICOMs;
+	myfile.close();
 }

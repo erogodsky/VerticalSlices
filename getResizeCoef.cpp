@@ -1,4 +1,5 @@
-#include "getResizeCoef.h"
+//#include "getResizeCoef.h"
+#include "DICOMImage.h"
 
 /*
 	Растягивание изображений вдоль оси Y с
@@ -8,11 +9,11 @@
 			S - расстояние между срезами в аксиальной проекции;
 			P - размер пикселя.
 */
-float getResizeCoef(vector<string> files)
+float DICOMImage::getResizeCoef()
 {
 	float resizeCoef;
 
-	string file = files[5];
+	string file = files_[5];
 	DcmFileFormat fileformat1;
 	Float64 sliceThickness;
 	Float64 pixelSpacing;
@@ -37,7 +38,7 @@ float getResizeCoef(vector<string> files)
 	else
 		cerr << "Error: cannot read DICOM file (" << status.text() << ")" << endl;
 
-	resizeCoef = ((sliceThickness + spacingBetweenSlices)/sliceThickness - 1./files.size()) * pixelSpacing;
+	resizeCoef = ((sliceThickness + spacingBetweenSlices)/sliceThickness - 1./files_.size()) * pixelSpacing;
 
 	return resizeCoef;
 }
