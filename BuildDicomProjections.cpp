@@ -41,7 +41,7 @@ void DICOMImage::BuildDICOMProjections()
 
 	/*
 		Обрезка "сырых" изображений в сегиттальной проекции
-		*/
+	*/
 	cv::Rect brain(0, 0, sagittal_.interData[0].cols, brainBottom);
 	for (int i = 0; i < sagittal_.interData.size(); i++)
 	{
