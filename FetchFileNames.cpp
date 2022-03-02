@@ -1,10 +1,9 @@
-//#include "getFileNames.h"
 #include "DICOMImage.h"
 
 /*
 	Создание вектора имён файлов исследования
 */
-void DICOMImage::getFileNames()
+void DICOMImage::FetchFileNames()
 {
 	const stdfs::directory_iterator end{};
 	for (stdfs::directory_iterator iter{ path_ }; iter != end; ++iter) 

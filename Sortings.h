@@ -1,4 +1,4 @@
-#include <opencv2/opencv.hpp>
+п»ї#include <opencv2/opencv.hpp>
 #include <opencv2/core/mat.hpp>
 
 #include "dcmtk/dcmdata/dcdeftag.h"
@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
-	Ключ сортировки – тег DCM_SliceLocation, DcmTagKey(0x0020, 0x1041)
+	РљР»СЋС‡ СЃРѕСЂС‚РёСЂРѕРІРєРё вЂ“ С‚РµРі DCM_SliceLocation, DcmTagKey(0x0020, 0x1041)
 */
 auto dicomSlicesOrderSort = [](string const& f1, string const& f2) -> bool
 {
@@ -41,7 +41,7 @@ auto dicomSlicesOrderSort = [](string const& f1, string const& f2) -> bool
 };
 
 /*
-	Сравнение контуров по верхнему экстремуму
+	РЎСЂР°РІРЅРµРЅРёРµ РєРѕРЅС‚СѓСЂРѕРІ РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Рµ Y РІРµСЂС…РЅРµРіРѕ СЌРєСЃС‚СЂРµРјСѓРјР°
 */
 auto contoursComparison = [](vector<cv::Point>& cnt1, vector<cv::Point>& cnt2)
 {

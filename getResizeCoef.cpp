@@ -1,4 +1,3 @@
-//#include "getResizeCoef.h"
 #include "DICOMImage.h"
 
 /*
@@ -9,7 +8,7 @@
 			S - расстояние между срезами в аксиальной проекции;
 			P - размер пикселя.
 */
-float DICOMImage::getResizeCoef()
+float DICOMImage::GetResizeCoef()
 {
 	float resizeCoef;
 
@@ -28,7 +27,7 @@ float DICOMImage::getResizeCoef()
 		if (!fileformat1.getDataset()->findAndGetFloat64(DCM_SpacingBetweenSlices, spacingBetweenSlices).good())
 		{
 			spacingBetweenSlices = 0.6;
-			//cerr << "Error: cannot access Spacing between slices!" << endl;
+			cerr << "Error: cannot access Spacing between slices!" << endl;
 		}
 		if (!fileformat1.getDataset()->findAndGetFloat64(DCM_PixelSpacing, pixelSpacing).good())
 		{

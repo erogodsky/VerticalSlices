@@ -1,4 +1,4 @@
-#ifndef DICOM
+п»ї#ifndef DICOM
 #define DICOM
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -22,6 +22,12 @@
 using namespace std;
 namespace stdfs = std::filesystem;
 
+typedef struct
+{
+	vector<cv::Mat> interData;
+	vector<cv::Mat> outputData;
+} Projection;
+
 class DICOMImage
 {
 public:
@@ -29,27 +35,26 @@ public:
 	{
 		path_ = path;
 
-		/*
-			Получение векторов проекций
-		*/
-		getDICOMProjections();
+		BuildDICOMProjections();
 	}
 
-	vector<cv::Mat> GetSagittalProjection() { return sagittal_; }
-	vector<cv::Mat> GetCoronarProjection() { return coronar_; }
-	vector<cv::Mat> GetAxialProjections() { return axial_; }
+	Projection GetSagittalProjection() { return sagittal_; }
+	Projection GetCoronarProjection() { return coronar_; }
+	Projection GetAxialProjections() { return axial_; }
 
 private:
-	void prepareImages();
-	void getFileNames();
-	float getResizeCoef();
-	void getDICOMProjections();
+	void PrepareAxial();
+	void FetchFileNames();
+	float GetResizeCoef();
+	void BuildDICOMProjections();
+	int FindBrainBottom();
 
 	vector<string> files_;
 	stdfs::path path_;
-	vector<cv::Mat> sagittal_;
-	vector<cv::Mat> coronar_;
-	vector<cv::Mat> axial_;
+	
+	Projection sagittal_;
+	Projection coronar_;
+	Projection axial_;
 };
 
 #endif

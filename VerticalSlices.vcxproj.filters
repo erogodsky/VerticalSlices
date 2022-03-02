@@ -15,19 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="getFileNames.cpp">
+    <ClCompile Include="FetchFileNames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="getDicomProjections.cpp">
+    <ClCompile Include="BuildDicomProjections.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="prepareImages.cpp">
+    <ClCompile Include="PrepareAxial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="getResizeCoef.cpp">
+    <ClCompile Include="GetResizeCoef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FindBrainBottom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

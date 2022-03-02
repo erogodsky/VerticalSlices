@@ -1,4 +1,3 @@
-//#include "Source.h"
 #include "DICOMImage.h"
 
 int main()
@@ -27,11 +26,11 @@ int main()
 	int i = 0;
 	while (1)
 	{
-		cv::Mat dst1 = DICOMImage.GetCoronarProjection()[i];
+		cv::Mat dst1 = DICOMImage.GetCoronarProjection().outputData[i];
 		//dst1.convertTo(dst1, CV_16UC1);
-		cv::Mat dst2 = DICOMImage.GetSagittalProjection()[i];
+		cv::Mat dst2 = DICOMImage.GetSagittalProjection().outputData[i];
 		//dst2.convertTo(dst2, CV_16UC1);
-		cv::Mat dst3 = DICOMImage.GetAxialProjections()[i];
+		cv::Mat dst3 = DICOMImage.GetAxialProjections().outputData[i];
 		//dst3.convertTo(dst3, CV_16UC1);
 		
 		cv::imshow("coronar", dst1);
@@ -47,7 +46,7 @@ int main()
 		int k = cv::waitKey(0);
 		if (k == 255 && i!=0) //z
 			i--;
-		if (k == 247 && i< DICOMImage.GetCoronarProjection().size()) //x
+		if (k == 247 && i < DICOMImage.GetAxialProjections().outputData.size()-1) //x
 			i++;
 		if (k == 27) //Esc
 			break;
