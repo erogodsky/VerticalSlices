@@ -28,6 +28,16 @@ typedef struct
 	vector<cv::Mat> outputData;
 } Projection;
 
+typedef struct
+{
+	int top;
+	int bottom;
+	int left;
+	int right;
+	int front;
+	int back;
+} BodyPartSpacing;
+
 class DICOMImage
 {
 public:
@@ -40,14 +50,14 @@ public:
 
 	Projection GetSagittalProjection() { return sagittal_; }
 	Projection GetCoronarProjection() { return coronar_; }
-	Projection GetAxialProjections() { return axial_; }
+	Projection GetAxialProjection() { return axial_; }
 
 private:
 	void PrepareAxial();
 	void FetchFileNames();
 	float GetResizeCoef();
 	void BuildDICOMProjections();
-	int FindBrainBottom();
+	void FindBraicaseSpacing();
 
 	vector<string> files_;
 	stdfs::path path_;
@@ -55,6 +65,8 @@ private:
 	Projection sagittal_;
 	Projection coronar_;
 	Projection axial_;
+
+	BodyPartSpacing braincase_;
 };
 
 #endif

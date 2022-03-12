@@ -26,16 +26,13 @@ int main()
 	int i = 0;
 	while (1)
 	{
-		cv::Mat dst1 = DICOMImage.GetCoronarProjection().outputData[i];
-		//dst1.convertTo(dst1, CV_16UC1);
-		cv::Mat dst2 = DICOMImage.GetSagittalProjection().outputData[i];
-		//dst2.convertTo(dst2, CV_16UC1);
-		cv::Mat dst3 = DICOMImage.GetAxialProjections().outputData[i];
-		//dst3.convertTo(dst3, CV_16UC1);
+		cv::Mat coronar = DICOMImage.GetCoronarProjection().outputData[i];
+		cv::Mat sagittal = DICOMImage.GetSagittalProjection().outputData[i];
+		cv::Mat axial = DICOMImage.GetAxialProjection().outputData[i];
 		
-		cv::imshow("coronar", dst1);
-		cv::imshow("sagittal", dst2);
-		cv::imshow("axial", dst3);
+		cv::imshow("coronar", coronar);
+		cv::imshow("sagittal", sagittal);
+		cv::imshow("axial", axial);
 
 		/*
 			Перемещение между срезами (русская раскладка):
@@ -46,11 +43,10 @@ int main()
 		int k = cv::waitKey(0);
 		if (k == 255 && i!=0) //z
 			i--;
-		if (k == 247 && i < DICOMImage.GetAxialProjections().outputData.size()-1) //x
+		if (k == 247 && i < DICOMImage.GetAxialProjection().outputData.size()-1) //x
 			i++;
 		if (k == 27) //Esc
 			break;
 	}
-	
 	return 0;
 }

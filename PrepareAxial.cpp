@@ -59,6 +59,7 @@ void DICOMImage::PrepareAxial()
 									// данного изображения больше 1500, считаем, что макушка найдена
 					{
 						topReached = true;
+						braincase_.top = i;
 					}
 				}
 			}

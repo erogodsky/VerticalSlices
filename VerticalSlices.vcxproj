@@ -149,7 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FindBrainBottom.cpp" />
+    <ClCompile Include="FindBraicaseSpacing.cpp" />
     <ClCompile Include="BuildDicomProjections.cpp" />
     <ClCompile Include="GetResizeCoef.cpp" />
     <ClCompile Include="PrepareAxial.cpp" />
