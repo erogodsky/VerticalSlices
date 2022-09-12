@@ -78,13 +78,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Libs\DCMTK\dcmtk-3.6.5\dcmdata\include;C:\Libs\DCMTK\dcmtk-3.6.5\config\include;C:\Libs\DCMTK\dcmtk-3.6.5\dcmimgle\include;C:\Libs\DCMTK\include;C:\Libs\OpenCV\opencv\build\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Libs\DCMTK\lib;C:\Libs\OpenCV\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Libs\PCL 1.12.1\3rdParty\VTK\include\vtk-9.1;C:\Libs\PCL 1.12.1\3rdParty\Qhull\include;C:\Libs\PCL 1.12.1\3rdParty\OpenNI2;C:\Libs\PCL 1.12.1\3rdParty\FLANN\include;C:\Libs\PCL 1.12.1\3rdParty\Eigen\eigen3;C:\Libs\PCL 1.12.1\3rdParty\Boost\include\boost-1_78;C:\Libs\PCL 1.12.1\include\pcl-1.12;C:\Libs\DCMTK\dcmtk-3.6.5\dcmdata\include;C:\Libs\DCMTK\dcmtk-3.6.5\config\include;C:\Libs\DCMTK\dcmtk-3.6.5\dcmimgle\include;C:\Libs\DCMTK\include;C:\Libs\OpenCV\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Libs\PCL 1.12.1\3rdParty\VTK\bin;C:\Libs\PCL 1.12.1\3rdParty\Qhull\bin;C:\Libs\PCL 1.12.1\3rdParty\FLANN\bin;C:\Libs\PCL 1.12.1\bin;C:\Libs\PCL 1.12.1\3rdParty\VTK\lib;C:\Libs\PCL 1.12.1\3rdParty\Qhull\lib;C:\Libs\PCL 1.12.1\3rdParty\OpenNI2;C:\Libs\PCL 1.12.1\3rdParty\FLANN\lib;C:\Libs\PCL 1.12.1\3rdParty\Eigen\eigen3;C:\Libs\PCL 1.12.1\3rdParty\Boost\lib;C:\Libs\PCL 1.12.1\lib;C:\Libs\DCMTK\lib;C:\Libs\OpenCV\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>C:\Libs\DCMTK\dcmtk-3.6.5\dcmdata\include;C:\Libs\DCMTK\dcmtk-3.6.5\config\include;C:\Libs\DCMTK\dcmtk-3.6.5\dcmimgle\include;C:\Libs\DCMTK\include;C:\Libs\OpenCV\opencv\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Libs\DCMTK\lib;C:\Libs\OpenCV\opencv\build\x64\vc15\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>true</VcpkgEnabled>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -126,7 +129,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Libs\DCMTK\lib;C:\Libs\OpenCV\opencv\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;NetAPI32.lib;WSock32.lib;opencv_world451d.lib;opencv_world451.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.Lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;NetAPI32.lib;WSock32.lib;opencv_world451d.lib;opencv_world451.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="FindBraicaseSpacing.cpp" />
     <ClCompile Include="BuildDicomProjections.cpp" />
+    <ClCompile Include="GenerateVesselMap.cpp" />
     <ClCompile Include="GetResizeCoef.cpp" />
     <ClCompile Include="PrepareAxial.cpp" />
     <ClCompile Include="main.cpp" />

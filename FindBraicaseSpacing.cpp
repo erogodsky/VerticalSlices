@@ -1,6 +1,6 @@
 ﻿#include "DICOMImage.h"
 
-void DICOMImage::FindBraicaseSpacing()
+void DICOMImage::FindBraincaseSpacing()
 {
 	cv::Mat img;
 	vector<vector<cv::Point>> topContours;
@@ -78,7 +78,7 @@ void DICOMImage::FindBraicaseSpacing()
 		braincase_.bottom);
 	for (int i = 0; i < sagittal_.interData.size(); i++)
 	{
-		sagittal_.interData[i] = sagittal_.interData[i](brainSagittal); // Обрезка "сырых" изображений в сагиттальной проекции
+		sagittal_.interData[i] = sagittal_.interData[i](brainSagittal); // Обрезка реконструированных изображений в сагиттальной проекции
 		
 		img = sagittal_.interData[i];
 		double minVal;

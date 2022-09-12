@@ -1,5 +1,5 @@
-﻿#ifndef DICOM
-#define DICOM
+﻿#pragma once
+#pragma comment(lib, "ws2_32.lib")
 
 #define _CRT_SECURE_NO_WARNINGS
 #define OPENCV_TRAITS_ENABLE_DEPRECATED
@@ -19,16 +19,17 @@
 #include "dcmtk/dcmimage/diregist.h"
 #include "dcmtk/dcmjpeg/djdecode.h"
 
-using namespace std;
+#include "pcl/visualization/cloud_viewer.h"
+
 namespace stdfs = std::filesystem;
 
-typedef struct
+struct Projection
 {
-	vector<cv::Mat> interData;
-	vector<cv::Mat> outputData;
-} Projection;
+	std::vector<cv::Mat> interData;
+	std::vector<cv::Mat> outputData;
+};
 
-typedef struct
+struct BodyPartSpacing
 {
 	int top;
 	int bottom;
@@ -36,15 +37,13 @@ typedef struct
 	int right;
 	int front;
 	int back;
-} BodyPartSpacing;
+};
 
 class DICOMImage
 {
 public:
-	DICOMImage(stdfs::path path) 
+	DICOMImage(stdfs::path path): path_{ path }
 	{
-		path_ = path;
-
 		BuildDICOMProjections();
 	}
 
@@ -52,21 +51,24 @@ public:
 	Projection GetCoronarProjection() { return coronar_; }
 	Projection GetAxialProjection() { return axial_; }
 
+	void GenerateVesselMap();
+
 private:
 	void PrepareAxial();
 	void FetchFileNames();
 	float GetResizeCoef();
 	void BuildDICOMProjections();
-	void FindBraicaseSpacing();
+	void FindBraincaseSpacing();
 
-	vector<string> files_;
+	std::vector<string> files_;
 	stdfs::path path_;
-	
+
 	Projection sagittal_;
 	Projection coronar_;
 	Projection axial_;
 
+	std::vector<cv::Mat> vesselMap_;
+
 	BodyPartSpacing braincase_;
 };
 
-#endif

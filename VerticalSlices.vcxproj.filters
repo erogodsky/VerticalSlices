@@ -33,6 +33,9 @@
     <ClCompile Include="FindBraicaseSpacing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GenerateVesselMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DICOMImage.h">

@@ -13,14 +13,14 @@ void DICOMImage::BuildDICOMProjections()
 	PrepareAxial(); //Получение вектора изображений в аксиальной проекции
 	
 	/*
-		Подготовка векторf для храниния "сырых" данных сагиттальной проекциb
+		Подготовка вектора для храниния "сырых" данных сагиттальной проекциb
 	*/
 	for (int i = 0; i < axial_.interData[0].cols; i++)
 	{
 		sagittal_.interData.push_back(cv::Mat::zeros(axial_.interData.size(), axial_.interData[0].rows, CV_16SC1));
 	}
 
-	/*
+	/*	
 		Попиксельное заполнение вектора "сырых" данных сагиттальной проекции для
 			определения по ней нижней точки мозга
 	*/
@@ -37,7 +37,7 @@ void DICOMImage::BuildDICOMProjections()
 		}
 	}
 
-	FindBraicaseSpacing(); // Поиск крайних точек черепной коробки
+	FindBraincaseSpacing(); // Поиск крайних точек черепной коробки
 
 	/*
 		Удаление лишних кадров в проекциях

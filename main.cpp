@@ -47,6 +47,8 @@ int main()
 			i++;
 		if (k == 27) //Esc
 			break;
+		if (k == 103) //g
+			DICOMImage.GenerateVesselMap();
 	}
 	return 0;
 }

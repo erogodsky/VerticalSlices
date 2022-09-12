@@ -37,7 +37,7 @@ float DICOMImage::GetResizeCoef()
 	else
 		cerr << "Error: cannot read DICOM file (" << status.text() << ")" << endl;
 
-	resizeCoef = ((sliceThickness + spacingBetweenSlices)/sliceThickness - 1./files_.size()) * pixelSpacing;
+	resizeCoef = ((sliceThickness + spacingBetweenSlices)/sliceThickness - 1./axial_.interData.size()) * pixelSpacing;
 
 	return resizeCoef;
 }
